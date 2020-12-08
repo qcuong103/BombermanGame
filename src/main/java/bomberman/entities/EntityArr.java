@@ -34,7 +34,8 @@ public class EntityArr {
             enemy = enemyIterator.next();
             if (!enemy.isAlive()) {
                 enemyIterator.remove();
-                GameViewManager.POINTS += 100;
+//                GameViewManager.POINTS += 100;
+                GameViewManager.addPoints(100);
             }
         }
     }

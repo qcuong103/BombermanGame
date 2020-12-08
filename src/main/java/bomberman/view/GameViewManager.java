@@ -16,6 +16,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class GameViewManager {
     public static int WIDTH = 50;
     public static int HEIGHT = 15;
@@ -66,7 +69,7 @@ public class GameViewManager {
 //        Sound.play("soundtrack");
         AnimationTimer timer = new AnimationTimer() {
             long lOLD = 0;
-            long numChange = 0;
+            int numChange = 0;
 
             @Override
             public void handle(long l) {
@@ -87,21 +90,32 @@ public class GameViewManager {
 //                }
 //                TIME -= l%1000000000;
 
-                if (lOLD != l) {
-                    lOLD = l;
-                    numChange++;
+//                if (lOLD != l) {
+//                    lOLD = l;
+//                    numChange++;
 //                    System.out.println(numChange);
-                }
-                if (numChange == 119) {
-                    TIME--;
-                    timeLabel.setText("Time: " + TIME);
-                    numChange = 0;
-                }
+//                }
+//                if (numChange == 119) {
+//                    TIME--;
+//                    timeLabel.setText("Time: " + TIME);
+//                    numChange = 0;
+//                }
 //                System.out.println(l%100000000);
+                timeLabel.setText("Time: " + TIME);
                 pointLabel.setText("Point: " + POINTS);
             }
         };
         timer.start();
+
+        Timer timer1 = new Timer();
+        timer1.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (TIME == 1) timer1.cancel();
+//                timeLabel.setText("Time: " + TIME);
+                --TIME;
+            }
+        }, 1000, 1000);
 
         /**
          * Hanh dong cua bomber
