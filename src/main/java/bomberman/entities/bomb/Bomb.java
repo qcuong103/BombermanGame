@@ -14,12 +14,12 @@ import java.util.TimerTask;
 public class Bomb extends Entity {
     private int flameLength;
 
-    private final List<Flame> fLeft = new ArrayList<Flame>();
-    private final List<Flame> fRight = new ArrayList<Flame>();
-    private final List<Flame> fUp = new ArrayList<Flame>();
-    private final List<Flame> fDown = new ArrayList<Flame>();
+    private final List<Flame> fLeft = new ArrayList<>();
+    private final List<Flame> fRight = new ArrayList<>();
+    private final List<Flame> fUp = new ArrayList<>();
+    private final List<Flame> fDown = new ArrayList<>();
 
-    public List<Flame> flames = new ArrayList<Flame>();
+    public List<Flame> flames = new ArrayList<>();
 
     private boolean isExploded = false;
 

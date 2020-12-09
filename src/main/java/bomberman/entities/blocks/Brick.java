@@ -31,9 +31,7 @@ public class Brick extends Entity {
                     public void run() {
                         Item item = randomItem();
                         if (item != null) {
-                            if (item != null){
-                                EntityArr.items.add(item);
-                            }
+                            EntityArr.items.add(item);
                             item.setVisible(true);
                         }
                     }
@@ -54,7 +52,7 @@ public class Brick extends Entity {
 
     private Item randomItem() {
         Random random = new Random();
-        int num = random.nextInt(4);
+        int num = random.nextInt(5);
         switch (num) {
             case 1:
                 return new BombItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE

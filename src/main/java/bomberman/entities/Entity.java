@@ -51,9 +51,7 @@ public abstract class Entity {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
+
 
     public boolean isVisible() {
         return isVisible;

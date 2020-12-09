@@ -4,7 +4,6 @@ import bomberman.view.Sprite;
 import javafx.scene.image.Image;
 
 public class Balloom extends Enemy {
-    private int time = 0;
 
     public Balloom(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);

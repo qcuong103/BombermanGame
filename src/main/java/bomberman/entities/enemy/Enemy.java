@@ -66,17 +66,12 @@ public abstract class Enemy extends Entity {
         return speedX;
     }
 
-    public void setSpeedX(int speedX) {
-        this.speedX = speedX;
-    }
+
 
     public int getSpeedY() {
         return speedY;
     }
 
-    public void setSpeedY(int speedY) {
-        this.speedY = speedY;
-    }
 
     protected void checkBoundBomber() {
         if (EntityArr.bomberman.intersects(this)) {

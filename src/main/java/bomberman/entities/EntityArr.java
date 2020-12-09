@@ -41,23 +41,11 @@ public class EntityArr {
     }
 
     public static void removeBrick() {
-        Iterator<Brick> brickIterator = bricks.listIterator();
-        while (brickIterator.hasNext()) {
-            Brick brick = brickIterator.next();
-            if (brick.isBroken()) {
-                brickIterator.remove();
-            }
-        }
+        bricks.removeIf(Brick::isBroken);
     }
 
     public static void removeBomb() {
-        Iterator<Bomb> bombIterator = bomberman.bombs.listIterator();
-        while (bombIterator.hasNext()) {
-            Bomb bomb = bombIterator.next();
-            if (bomb.isExploded()) {
-                bombIterator.remove();
-            }
-        }
+        bomberman.bombs.removeIf(Bomb::isExploded);
     }
 
     public static void clearArr() {

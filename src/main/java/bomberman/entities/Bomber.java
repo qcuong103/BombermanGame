@@ -5,7 +5,6 @@ import bomberman.entities.bomb.Bomb;
 import bomberman.sound.Sound;
 import bomberman.view.GameViewManager;
 import bomberman.view.Sprite;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -19,8 +18,6 @@ public class Bomber extends bomberman.entities.Entity {
     private int speed = Sprite.DEFAULT_SIZE / 6;
 
     private boolean isAlive = true;
-
-    private boolean bombPass = false;
 
     private boolean wallPass = false;
 
@@ -152,12 +149,10 @@ public class Bomber extends bomberman.entities.Entity {
     }
 
     public boolean isBombPass() {
-        return bombPass;
+        return false;
     }
 
-    public void setBombPass(boolean bombPass) {
-        this.bombPass = bombPass;
-    }
+
 
     public void setWallPass(boolean wallPass) {
         this.wallPass = wallPass;

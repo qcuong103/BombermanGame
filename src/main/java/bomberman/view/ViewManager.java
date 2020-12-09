@@ -1,9 +1,12 @@
 package bomberman.view;
 
+import bomberman.entities.CreateMap;
 import bomberman.model.BomberManButton;
 import bomberman.model.BomberManSubScene;
 import bomberman.model.InfoLabel;
 import bomberman.sound.Sound;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -152,13 +155,11 @@ public class ViewManager {
 //                shipChooserSubScene.moveSubScene();
             Sound.play("robotSFX");
             mainStage.hide();
-            GameViewManager gameViewManager = new GameViewManager();
-            gameViewManager.showGame();
-//                GameViewManager.showGame();
-//                gameViewManager.showGame();
-//                new Frame();
-//                Frame gameViewManager = new Frame();
-//                gameViewManager.createNewGame(mainStage);
+//            GameViewManager gameViewManager = new GameViewManager();
+//            gameViewManager.showGame();
+
+            GameViewManager.getInstance().showGame();
+            CreateMap.createMapByLevel(1);
 
         });
     }

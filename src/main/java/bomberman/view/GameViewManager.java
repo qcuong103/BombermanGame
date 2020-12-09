@@ -35,6 +35,7 @@ public class GameViewManager {
     public static int POINTS = 0;
     public static int numOfScreen = -1;
     public boolean isGameOver = false;
+//    public boolean isGameOver2 = false;
     public int abc = 0;
 
     private final Stage stage = new Stage();
@@ -44,6 +45,7 @@ public class GameViewManager {
 
     boolean up, down, left, right;
 
+    private static GameViewManager gameViewManager = new GameViewManager();
 
     public static int level = 1;
 
@@ -85,7 +87,7 @@ public class GameViewManager {
 
         // Them scene vao stage
         stage.setScene(scene);
-        stage.show();
+//        stage.show();
 
 //        Sound.play("soundtrack");
         AnimationTimer timer = new AnimationTimer() {
@@ -127,16 +129,16 @@ public class GameViewManager {
             }
         };
         timer.start();
-        if (abc > 500) {
-            timer.stop();
-        }
+//        if (isGameOver2) {
+//            timer.stop();
+//        }
 
 
         Timer timer1 = new Timer();
         timer1.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (TIME == 1) timer1.cancel();
+                if (TIME == 0) timer1.cancel();
 //                if (scene.)
 //                timeLabel.setText("Time: " + TIME);
                 --TIME;
@@ -304,19 +306,24 @@ public class GameViewManager {
 //            root.getChildren().add(button);
         }
 
-//        if (abc > 500) {
-//
-//            stage.hide();
-//            ViewManager.mainStage.show();
-//            abc = 202;
-//        }
+        if (abc > 500) {
+//            isGameOver2 = true;
+            stage.hide();
+            ViewManager.mainStage.show();
+            abc = 0;
+        }
     }
 
 
     public void endGame() {
         numOfScreen = 1;
         isGameOver = true;
+//        isGameOver2 = true;
 //        drawScreen(gc);
         drawEndGame(gc, POINTS);
+    }
+
+    public static GameViewManager getInstance() {
+        return gameViewManager;
     }
 }
