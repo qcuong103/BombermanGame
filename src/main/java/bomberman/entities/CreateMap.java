@@ -43,10 +43,10 @@ public class CreateMap {
                     Balloom balloom;
                     Oneal oneal;
                     Doll doll;
-                    Minvo minvo;
-                    Kondoria kondoria;
+//                    Minvo minvo;
+//                    Kondoria kondoria;
                     Ovape ovape;
-                    Pass pass;
+//                    Pass pass;
                     // create wall and grass
                     if (j == 0 || j == GameViewManager.HEIGHT - 1 || i == 0 || i == GameViewManager.WIDTH - 1 || maps[j][i] == '#') {
                         object = new Wall(i, j, Sprite.wall.getFxImage());
@@ -73,23 +73,15 @@ public class CreateMap {
                     } else if (maps[j][i] == '3') {
                         doll = new Doll(i, j, Sprite.doll_left2.getFxImage());
                         bomberman.entities.EntityArr.enemies.add(doll);
-                    } else if (maps[j][i] == '4') {
-                        minvo = new Minvo(i, j, Sprite.minvo_right2.getFxImage());
-                        bomberman.entities.EntityArr.enemies.add(minvo);
-                    } else if (maps[j][i] == '5') {
-                        kondoria = new Kondoria(i, j, Sprite.kondoria_right1.getFxImage());
-                        bomberman.entities.EntityArr.enemies.add(kondoria);
                     } else if (maps[j][i] == '6') {
                         ovape = new Ovape(i, j, Sprite.ovape_right1.getFxImage());
                         bomberman.entities.EntityArr.enemies.add(ovape);
-                    } else if (maps[j][i] == '7') {
-                        pass = new Pass(i, j, Sprite.pass_left3.getFxImage());
-                        bomberman.entities.EntityArr.enemies.add(pass);
                     }
                 }
             }
             fileReader.close();
             buffReader.close();
+            GameViewManager.TIME = 200;
         } catch (Exception exception) {
             System.out.println("Error: " + exception);
         }

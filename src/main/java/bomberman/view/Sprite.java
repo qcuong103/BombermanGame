@@ -2,6 +2,8 @@ package bomberman.view;
 
 import javafx.scene.image.*;
 
+import java.util.Arrays;
+
 public class Sprite {
 
     public static final int DEFAULT_SIZE = 16;
@@ -228,9 +230,7 @@ public class Sprite {
     }
 
     private void setColor(int color) {
-        for (int i = 0; i < _pixels.length; i++) {
-            _pixels[i] = color;
-        }
+        Arrays.fill(_pixels, color);
     }
 
     private void load() {
@@ -310,17 +310,16 @@ public class Sprite {
             }
         }
         Image input = new ImageView(wr).getImage();
-        return resample(input, SCALED_SIZE / DEFAULT_SIZE);
+        return resample(input);
     }
 
-    private Image resample(Image input, int scaleFactor) {
+    private Image resample(Image input) {
         final int W = (int) input.getWidth();
         final int H = (int) input.getHeight();
-        final int S = scaleFactor;
 
         WritableImage output = new WritableImage(
-                W * S,
-                H * S
+                W * 2,
+                H * 2
         );
 
         PixelReader reader = input.getPixelReader();
@@ -329,9 +328,9 @@ public class Sprite {
         for (int y = 0; y < H; y++) {
             for (int x = 0; x < W; x++) {
                 final int argb = reader.getArgb(x, y);
-                for (int dy = 0; dy < S; dy++) {
-                    for (int dx = 0; dx < S; dx++) {
-                        writer.setArgb(x * S + dx, y * S + dy, argb);
+                for (int dy = 0; dy < 2; dy++) {
+                    for (int dx = 0; dx < 2; dx++) {
+                        writer.setArgb(x * 2 + dx, y * 2 + dy, argb);
                     }
                 }
             }

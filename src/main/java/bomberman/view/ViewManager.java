@@ -3,27 +3,27 @@ package bomberman.view;
 import bomberman.model.BomberManButton;
 import bomberman.model.BomberManSubScene;
 import bomberman.model.InfoLabel;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import bomberman.sound.Sound;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ViewManager {
-    //    private static final int HEIGHT = 768;
-//    private static final int WIDTH = 1024;
+
     private static final int HEIGHT = 480;
     private static final int WIDTH = 640;
-    private AnchorPane mainPane;
-    private Scene mainScene;
-    private Stage mainStage;
+    private final AnchorPane mainPane;
+    public static Stage mainStage = new Stage();
 
     private final static double MENU_BUTTON_START_X = 62.5;
     private final static double MENU_BUTTON_START_Y = 93.75;
@@ -40,8 +40,8 @@ public class ViewManager {
     public ViewManager() {
         menuButtons = new ArrayList<>();
         mainPane = new AnchorPane();
-        mainScene = new Scene(mainPane, WIDTH, HEIGHT);
-        mainStage = new Stage();
+        Scene mainScene = new Scene(mainPane, WIDTH, HEIGHT);
+//        mainStage = new Stage();
         mainStage.setScene(mainScene);
         createSubScenes();
         createButton();
@@ -68,7 +68,7 @@ public class ViewManager {
         creditsScene = new BomberManSubScene();
         mainPane.getChildren().add(creditsScene);
 
-        InfoLabel creditsLabel = new InfoLabel("CREDITS");
+        InfoLabel creditsLabel = new InfoLabel("   <<< CREDITS >>>");
         creditsLabel.setLayoutX(68.75);
         creditsLabel.setLayoutY(15.675);
         creditsScene.getPane().getChildren().add(creditsLabel);
@@ -78,20 +78,44 @@ public class ViewManager {
         helpScene = new BomberManSubScene();
         mainPane.getChildren().add(helpScene);
 
-        InfoLabel helpLabel = new InfoLabel("HELP");
+        InfoLabel helpLabel = new InfoLabel("   <<<< HELP >>>>");
         helpLabel.setLayoutX(68.75);
         helpLabel.setLayoutY(15.675);
-        helpScene.getPane().getChildren().add(helpLabel);
+
+        GridPane helpGrid = new GridPane();
+        helpGrid.setLayoutX(68.75);
+        helpGrid.setLayoutY(15.675);
+        helpGrid.setHgap(20);
+        helpGrid.setVgap(20);
+
+
+        helpScene.getPane().getChildren().addAll(helpLabel, helpGrid);
     }
 
     private void createScoreSubScene() {
         scoreScene = new BomberManSubScene();
         mainPane.getChildren().add(scoreScene);
 
-        InfoLabel scoreLabel = new InfoLabel("SCORE");
+        InfoLabel scoreLabel = new InfoLabel("<<<< SCORE >>>>");
         scoreLabel.setLayoutX(68.75);
         scoreLabel.setLayoutY(15.675);
-        scoreScene.getPane().getChildren().add(scoreLabel);
+        VBox scoreContainer = new VBox();
+        scoreContainer.setLayoutX(68.75);
+        scoreContainer.setLayoutY(80);
+
+        Label scoreHeading = new Label("     Name			Score   ");
+        scoreHeading.setUnderline(true);
+        Label score1 = new Label("Astronaught 1		  100");
+        Label score2 = new Label("Astronaught 2		  100");
+        Label score3 = new Label("Astronaught 3		  100");
+        scoreHeading.setFont(Font.font("Verdana",15.675));
+        score1.setFont(Font.font("Verdana",15.675));
+        score2.setFont(Font.font("Verdana",15.675));
+        score3.setFont(Font.font("Verdana",15.675));
+        scoreContainer.setBackground(new Background(new BackgroundFill(Color.MEDIUMAQUAMARINE,
+                new CornerRadii(20), new Insets(-20,-20,-20,-20))));
+        scoreContainer.getChildren().addAll(scoreHeading, score1, score2, score3);
+        scoreScene.getPane().getChildren().addAll(scoreLabel, scoreContainer);
     }
 
     public Stage getMainStage() {
@@ -117,10 +141,7 @@ public class ViewManager {
     private void createStartButton() {
         BomberManButton startButton = new BomberManButton("PLAY");
         addMenuButtons(startButton);
-        startButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
+        startButton.setOnAction(event -> {
 //                try {
 //                    SoundEffects.playSound(new URI(BUTTON_SFX));
 //                } catch (URISyntaxException e) {
@@ -129,24 +150,23 @@ public class ViewManager {
 //                }
 //                showSubscene(shipChooserSubScene);
 //                shipChooserSubScene.moveSubScene();
-                mainStage.hide();
-                GameViewManager gameViewManager = new GameViewManager();
-                gameViewManager.showGame();
+            Sound.play("robotSFX");
+            mainStage.hide();
+            GameViewManager gameViewManager = new GameViewManager();
+            gameViewManager.showGame();
+//                GameViewManager.showGame();
+//                gameViewManager.showGame();
 //                new Frame();
 //                Frame gameViewManager = new Frame();
 //                gameViewManager.createNewGame(mainStage);
 
-            }
         });
     }
 
     private void createScoresButton() {
         BomberManButton scoresButton = new BomberManButton("SCORES");
         addMenuButtons(scoresButton);
-        scoresButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
+        scoresButton.setOnAction(event -> {
 //                try {
 //                    SoundEffects.playSound(new URI(BUTTON_SFX));
 //                } catch (URISyntaxException e) {
@@ -154,27 +174,24 @@ public class ViewManager {
 //                    e.printStackTrace();
 //                }
 //                scoreSubScene.moveSubScene();
-                showSubscene(scoreScene);
-            }
+            Sound.play("robotSFX");
+            showSubscene(scoreScene);
         });
     }
 
     private void createHelpButton() {
         BomberManButton helpButton = new BomberManButton("HELP");
         addMenuButtons(helpButton);
-        helpButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent arg0) {
+        helpButton.setOnAction(arg0 -> {
 //                try {
 //                    SoundEffects.playSound(new URI(BUTTON_SFX));
 //                } catch (URISyntaxException e) {
 //                    // TODO Auto-generated catch block
 //                    e.printStackTrace();
 //                }
-                showSubscene(helpScene);
+            Sound.play("robotSFX");
+            showSubscene(helpScene);
 //                helpSubScene.moveSubScene();
-            }
         });
     }
 
@@ -182,19 +199,16 @@ public class ViewManager {
         BomberManButton creditsButton = new BomberManButton("CREDITS");
         addMenuButtons(creditsButton);
 
-        creditsButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent arg0) {
+        creditsButton.setOnAction(arg0 -> {
 //                try {
 //                    SoundEffects.playSound(new URI(BUTTON_SFX));
 //                } catch (URISyntaxException e) {
 //                    // TODO Auto-generated catch block
 //                    e.printStackTrace();
 //                }
-                showSubscene(creditsScene);
+            Sound.play("robotSFX");
+            showSubscene(creditsScene);
 //                creditsSubScene.moveSubScene();
-            }
         });
     }
 
@@ -202,20 +216,18 @@ public class ViewManager {
         BomberManButton exitButton = new BomberManButton("EXIT");
         addMenuButtons(exitButton);
 
-        exitButton.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                mainStage.close();
+        exitButton.setOnAction(event -> {
+            Sound.play("robotSFX");
+            mainStage.close();
 //                try {
 //                    SoundEffects.playSound(new URI(BUTTON_SFX));
 //                } catch (URISyntaxException e) {
+
 //                    // TODO Auto-generated catch block
 //                    e.printStackTrace();
 //                }
 //                Platform.exit();
 //                // mainStage.close();
-            }
         });
     }
 

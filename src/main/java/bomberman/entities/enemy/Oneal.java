@@ -17,6 +17,9 @@ public class Oneal extends Enemy {
         super.update();
         go();
         choseSprite();
+        if (!isAlive()) {
+            super.enemyDead();
+        }
     }
 
     @Override

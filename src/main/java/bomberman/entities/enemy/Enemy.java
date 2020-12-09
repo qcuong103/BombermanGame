@@ -31,6 +31,7 @@ public abstract class Enemy extends Entity {
     public void update() {
         this.animate += Sprite.DEFAULT_SIZE / 10;
         checkBoundBomber();
+//        if ()
     }
 
     public int getSpeed() {
@@ -51,8 +52,8 @@ public abstract class Enemy extends Entity {
 
     public void enemyDead() {
 //        GameViewManager.POINTS += 1;
-        this.setImg(Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3
-                , this.animate, Sprite.DEFAULT_SIZE).getFxImage());
+        setImg(Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3
+                , this.animate, 20).getFxImage());
     }
 
     protected void randomVector() {

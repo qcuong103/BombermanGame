@@ -13,6 +13,9 @@ public class Ovape extends Enemy {
         super.update();
         go();
         choseSprite();
+        if (!isAlive()) {
+            super.enemyDead();
+        }
     }
 
     @Override

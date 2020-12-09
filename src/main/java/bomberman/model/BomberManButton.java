@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 
 public class BomberManButton extends Button {
 
-    private final String FONT_PATH = "resources/model/kenvector_future.ttf";
     private static final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent;-fx-background-image: url('/model/yellow_button_pressed.png')";
     private static final String BUTTON_FREE_STYLE = "-fx-background-color: transparent;-fx-background-image: url('/model/yellow_button.png');";
 
@@ -29,6 +28,7 @@ public class BomberManButton extends Button {
     private void setButtonFont() {
 
         try {
+            String FONT_PATH = "resources/model/kenvector_future.ttf";
             setFont(Font.loadFont(new FileInputStream(FONT_PATH), 14.375));
         } catch (FileNotFoundException fileNotFoundException) {
             setFont(Font.font("Verdana", 14.375));
@@ -51,40 +51,20 @@ public class BomberManButton extends Button {
 
     private void initializeButtonListeners() {
 
-        setOnMousePressed(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                if(event.getButton().equals(MouseButton.PRIMARY)) {
-                    setButtonPressedStyle();
-                }
+        setOnMousePressed(event -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)) {
+                setButtonPressedStyle();
             }
         });
 
-        setOnMouseReleased(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                if(event.getButton().equals(MouseButton.PRIMARY)) {
-                    setButtonReleasedStyle();
-                }
+        setOnMouseReleased(event -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)) {
+                setButtonReleasedStyle();
             }
         });
 
-        setOnMouseEntered(new EventHandler<MouseEvent>() {
+        setOnMouseEntered(event -> setEffect(new DropShadow(10, Color.YELLOW)));
 
-            @Override
-            public void handle(MouseEvent event) {
-                setEffect(new DropShadow(10, Color.YELLOW));
-            }
-        });
-
-        setOnMouseExited(new EventHandler<MouseEvent>() {
-
-            @Override
-            public void handle(MouseEvent event) {
-                setEffect(null);
-            }
-        });
+        setOnMouseExited(event -> setEffect(null));
     }
 }

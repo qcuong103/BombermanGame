@@ -6,41 +6,25 @@ import javax.sound.sampled.Clip;
 import java.net.URL;
 
 public class Sound {
-    public Sound(String name) {
-
-    }
+    public static boolean stopsound = false;
 
     public static void play(String soundName) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = getClass().getResource("/sound/" + soundName + ".wav");
-                    AudioInputStream ais = AudioSystem.getAudioInputStream(url);
-                    Clip clip = AudioSystem.getClip();
-                    clip.open(ais);
-                    clip.start();
-                } catch (Exception e) {
-                    System.out.println("sound fall");
+        if (!stopsound) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        URL url = getClass().getResource("/sound/" + soundName + ".wav");
+                        AudioInputStream ais = AudioSystem.getAudioInputStream(url);
+                        Clip clip = AudioSystem.getClip();
+                        clip.open(ais);
+                        clip.start();
+                    } catch (Exception e) {
+                        System.out.println("sound fall");
+                    }
                 }
-            }
-        }).start();
+            }).start();
+        }
     }
 
-    public static void stop(String soundName) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = getClass().getResource("/sound/" + soundName + ".wav");
-                    AudioInputStream ais = AudioSystem.getAudioInputStream(url);
-                    Clip clip = AudioSystem.getClip();
-                    clip.open(ais);
-                    clip.stop();
-                } catch (Exception e) {
-                    System.out.println("sound fall");
-                }
-            }
-        }).start();
-    }
 }

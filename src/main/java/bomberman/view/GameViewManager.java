@@ -1,19 +1,28 @@
 package bomberman.view;
 
 import bomberman.entities.CreateMap;
+import bomberman.entities.Entity;
 import bomberman.entities.EntityArr;
 import bomberman.entities.blocks.Brick;
 import bomberman.entities.bomb.Bomb;
+import bomberman.entities.bomb.Flame;
 import bomberman.entities.enemy.Enemy;
+import bomberman.sound.Sound;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.util.Timer;
@@ -22,16 +31,19 @@ import java.util.TimerTask;
 public class GameViewManager {
     public static int WIDTH = 50;
     public static int HEIGHT = 15;
-    public static int TIME = 200;
+    public static int TIME = -1;
     public static int POINTS = 0;
+    public static int numOfScreen = -1;
+    public boolean isGameOver = false;
+    public int abc = 0;
 
-    private Stage stage = new Stage();
-    private GraphicsContext gc;
-    private Canvas canvas;
+    private final Stage stage = new Stage();
+    private final GraphicsContext gc;
+    private final Canvas canvas;
+    public BorderPane root;
 
     boolean up, down, left, right;
 
-    public static boolean gameOver = false;
 
     public static int level = 1;
 
@@ -43,18 +55,27 @@ public class GameViewManager {
 
         // Tao root container
 //        Group root = new Group();
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
+
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setPrefWidth(Sprite.SCALED_SIZE * WIDTH);
+
         Label timeLabel = new Label("Time: " + TIME);
+        timeLabel.setBackground(new Background(new BackgroundFill(Color.BLACK,null, null)));
+        timeLabel.setTextFill(Color.WHITE);
         timeLabel.setPrefWidth(Sprite.SCALED_SIZE * WIDTH / 2);
         timeLabel.setAlignment(Pos.CENTER);
+
         Label pointLabel = new Label("Point: 0");
+        pointLabel.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+        pointLabel.setTextFill(Color.WHITE);
         pointLabel.setPrefWidth(Sprite.SCALED_SIZE * WIDTH / 2);
         pointLabel.setAlignment(Pos.CENTER);
+
         gridPane.add(timeLabel,0,0);
         gridPane.add(pointLabel, 1, 0);
+
         root.setTop(gridPane);
         root.setBottom(canvas);
 //        root.getChildren().add(canvas);
@@ -68,8 +89,6 @@ public class GameViewManager {
 
 //        Sound.play("soundtrack");
         AnimationTimer timer = new AnimationTimer() {
-            long lOLD = 0;
-            int numChange = 0;
 
             @Override
             public void handle(long l) {
@@ -103,23 +122,45 @@ public class GameViewManager {
 //                System.out.println(l%100000000);
                 timeLabel.setText("Time: " + TIME);
                 pointLabel.setText("Point: " + POINTS);
+//                drawScreen(gc);
+
             }
         };
         timer.start();
+        if (abc > 500) {
+            timer.stop();
+        }
+
 
         Timer timer1 = new Timer();
         timer1.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if (TIME == 1) timer1.cancel();
+//                if (scene.)
 //                timeLabel.setText("Time: " + TIME);
                 --TIME;
-            }
-        }, 1000, 1000);
 
-        /**
-         * Hanh dong cua bomber
-         */
+                if (isGameOver) {
+//                    drawScreen(gc);
+//                    timer.stop();
+//                    drawEndGame(canvas.getGraphicsContext2D(), POINTS);
+                    timer1.cancel();
+                }
+            }
+
+//        if (!EntityArr.bomberman.isAlive()) {
+////            drawScreen(gc);
+//                endGame();
+//            }
+        }, 1000, 1000);
+        timer1.purge();
+
+        stage.setOnCloseRequest(event -> {
+            timer1.cancel();
+//                stage.close();
+        });
+
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case UP:
@@ -169,15 +210,15 @@ public class GameViewManager {
         EntityArr.bomberman.bombs.forEach(Bomb::update);
         EntityArr.bricks.forEach(Brick::update);
         // update flame
-        EntityArr.bomberman.bombs.forEach(g -> g.getfUp().forEach(g1 -> g1.update()));
-        EntityArr.bomberman.bombs.forEach(g -> g.getfDown().forEach(g1 -> g1.update()));
-        EntityArr.bomberman.bombs.forEach(g -> g.getfLeft().forEach(g1 -> g1.update()));
-        EntityArr.bomberman.bombs.forEach(g -> g.getfRight().forEach(g1 -> g1.update()));
+        EntityArr.bomberman.bombs.forEach(g -> g.getfUp().forEach(Flame::update));
+        EntityArr.bomberman.bombs.forEach(g -> g.getfDown().forEach(Flame::update));
+        EntityArr.bomberman.bombs.forEach(g -> g.getfLeft().forEach(Flame::update));
+        EntityArr.bomberman.bombs.forEach(g -> g.getfRight().forEach(Flame::update));
         // Update item
         EntityArr.items.forEach(g -> {
             if (g.isVisible()) g.update();
         });
-        EntityArr.portals.forEach(g -> g.update());
+        EntityArr.portals.forEach(Entity::update);
     }
 
     // vẽ
@@ -197,6 +238,13 @@ public class GameViewManager {
         });
         EntityArr.bombers.forEach(g -> g.render(gc));
 
+        if (!EntityArr.bomberman.isAlive() || (TIME == 0)) {
+//            drawScreen(gc);
+            endGame();
+//            gameOver = true;
+        }
+//        drawScreen(gc);
+
     }
 
     public void showGame() {
@@ -205,5 +253,70 @@ public class GameViewManager {
 
     public static void addPoints(int points) {
         POINTS += points;
+    }
+
+//    public void drawScreen(GraphicsContext gc) {
+//        switch (numOfScreen) {
+//            case 1:
+//                drawEndGame(gc, POINTS);
+//                break;
+//            case 2:
+////                drawEndGame(gc, level);
+//                drawNextLevel(gc, level);
+//                break;
+//        }
+////        drawEndGame(gc, POINTS);
+//    }
+    public void drawEndGame(GraphicsContext gc, int points) {
+//        try {
+//            TimeUnit.SECONDS.sleep(2);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        abc++;
+        if (abc > 210) {
+//            abc = 0;
+            Sound.stopsound = true;
+            gc.setFill(Color.BLACK);
+
+            gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+            Font font = new Font("Arial", 40);
+
+            gc.setFont(font);
+            gc.setTextAlign(TextAlignment.CENTER);
+            gc.setTextBaseline(VPos.CENTER);
+            gc.setFill(Color.WHITE);
+//        drawCenteredString("GAME OVER", canvas.getWidth(), canvas.getHeight(), gc);
+            gc.fillText("GAME OVER", canvas.getWidth() / 2, canvas.getHeight() / 2 - 25);
+
+            font = new Font("Arial", 20);
+            gc.setFont(font);
+            gc.setTextAlign(TextAlignment.CENTER);
+            gc.setTextBaseline(VPos.CENTER);
+            gc.setFill(Color.YELLOW);
+//        drawCenteredString("POINTS: " + points, canvas.getWidth(), canvas.getHeight() + 20, gc);
+            gc.fillText("POINTS: " + points, canvas.getWidth() / 2, canvas.getHeight() / 2 + 25);
+
+//            BomberManButton button = new BomberManButton("MENU");
+//            button.setLayoutX(canvas.getWidth() / 2);
+//            button.setLayoutY(canvas.getHeight() + 50);
+//            root.getChildren().add(button);
+        }
+
+//        if (abc > 500) {
+//
+//            stage.hide();
+//            ViewManager.mainStage.show();
+//            abc = 202;
+//        }
+    }
+
+
+    public void endGame() {
+        numOfScreen = 1;
+        isGameOver = true;
+//        drawScreen(gc);
+        drawEndGame(gc, POINTS);
     }
 }

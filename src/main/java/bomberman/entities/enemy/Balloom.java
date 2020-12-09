@@ -15,6 +15,9 @@ public class Balloom extends Enemy {
         super.update();
         go();
         choseSprite();
+        if (!isAlive()) {
+            super.enemyDead();
+        }
     }
 
     @Override
@@ -52,9 +55,6 @@ public class Balloom extends Enemy {
                     this.randomVector();
                 }
             }
-        } else {
-            this.enemyDead();
-
         }
     }
 }

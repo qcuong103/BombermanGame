@@ -5,6 +5,7 @@ import bomberman.entities.bomb.Bomb;
 import bomberman.sound.Sound;
 import bomberman.view.GameViewManager;
 import bomberman.view.Sprite;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -44,6 +45,8 @@ public class Bomber extends bomberman.entities.Entity {
                 this.time++;
                 GameViewManager.level++;
                 CreateMap.createMapByLevel(GameViewManager.level);
+//                GameViewManager.numOfScreen = 2;
+//                GameViewManager.TIME = 200;
             }
         }
     }
@@ -222,7 +225,7 @@ public class Bomber extends bomberman.entities.Entity {
 
     private void bomberDead() {
         setImg(Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3
-                , this.animate, Sprite.DEFAULT_SIZE).getFxImage());
+                , this.animate, 120).getFxImage());
     }
 
     @Override

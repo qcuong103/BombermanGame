@@ -54,7 +54,7 @@ public class Brick extends Entity {
 
     private Item randomItem() {
         Random random = new Random();
-        int num = random.nextInt(50);
+        int num = random.nextInt(4);
         switch (num) {
             case 1:
                 return new BombItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
@@ -65,15 +65,11 @@ public class Brick extends Entity {
             case 3:
                 return new SpeedItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
                         , Sprite.powerup_speed.getFxImage());
+
             case 4:
-                return new BombPassItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
-                        , Sprite.powerup_bombpass.getFxImage());
-            case 5:
                 return new WallPassItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
                         , Sprite.powerup_wallpass.getFxImage());
-            case 6:
-                return new FlamePassItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
-                        , Sprite.powerup_flamepass.getFxImage());
+
             default:
                 return null;
         }

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class BombermanGame extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         ViewManager manager = new ViewManager();
         primaryStage = manager.getMainStage();
         primaryStage.show();
@@ -17,6 +17,5 @@ public class BombermanGame extends Application {
     public static void main(String[] args) {
         Sound.play("soundtrack");
         launch(args);
-//        new Frame();
     }
 }
