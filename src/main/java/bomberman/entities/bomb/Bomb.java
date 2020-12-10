@@ -1,5 +1,6 @@
 package bomberman.entities.bomb;
 
+import bomberman.entities.Bomber;
 import bomberman.entities.Entity;
 import bomberman.entities.EntityArr;
 import bomberman.sound.Sound;

@@ -2,6 +2,7 @@ package bomberman.entities.enemy;
 
 import bomberman.entities.Entity;
 import bomberman.entities.EntityArr;
+import bomberman.sound.Sound;
 import bomberman.view.Sprite;
 import javafx.scene.image.Image;
 

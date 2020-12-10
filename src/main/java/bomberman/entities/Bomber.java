@@ -15,7 +15,7 @@ public class Bomber extends bomberman.entities.Entity {
 
     private int flameLength = 1;
 
-    private int speed = Sprite.DEFAULT_SIZE / 6;
+    private int speed = Sprite.DEFAULT_SIZE / 8;
 
     private boolean isAlive = true;
 
@@ -219,6 +219,7 @@ public class Bomber extends bomberman.entities.Entity {
 
 
     private void bomberDead() {
+//        Sound.play("endgame3");
         setImg(Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3
                 , this.animate, 120).getFxImage());
     }

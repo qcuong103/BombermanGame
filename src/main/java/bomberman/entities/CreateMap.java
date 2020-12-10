@@ -48,34 +48,55 @@ public class CreateMap {
                     Ovape ovape;
 //                    Pass pass;
                     // create wall and grass
-                    if (j == 0 || j == GameViewManager.HEIGHT - 1 || i == 0 || i == GameViewManager.WIDTH - 1 || maps[j][i] == '#') {
+                    if (maps[j][i] == '#') {
                         object = new Wall(i, j, Sprite.wall.getFxImage());
-                        bomberman.entities.EntityArr.walls.add(object);
+                        EntityArr.walls.add(object);
                     } else {
                         object = new Grass(i, j, Sprite.grass.getFxImage());
-                        bomberman.entities.EntityArr.grasses.add(object);
+                        EntityArr.grasses.add(object);
                     }
                     // create portal
                     if (maps[j][i] == 'x') {
                         object = new Portal(i, j, Sprite.portal.getFxImage());
-                        bomberman.entities.EntityArr.portals.add(object);
+                        EntityArr.portals.add(object);
                     }
                     // create brick
-                    if (maps[j][i] == 'x' || maps[j][i] == '*') {
-                        brick = new Brick(i, j, Sprite.brick.getFxImage());
-                        bomberman.entities.EntityArr.bricks.add(brick);
-                    } else if (maps[j][i] == '1') {
-                        balloom = new Balloom(i, j, Sprite.balloom_left1.getFxImage());
-                        bomberman.entities.EntityArr.enemies.add(balloom);
-                    } else if (maps[j][i] == '2') {
-                        oneal = new Oneal(i, j, Sprite.oneal_right1.getFxImage());
-                        bomberman.entities.EntityArr.enemies.add(oneal);
-                    } else if (maps[j][i] == '3') {
-                        doll = new Doll(i, j, Sprite.doll_left2.getFxImage());
-                        bomberman.entities.EntityArr.enemies.add(doll);
-                    } else if (maps[j][i] == '6') {
-                        ovape = new Ovape(i, j, Sprite.ovape_right1.getFxImage());
-                        bomberman.entities.EntityArr.enemies.add(ovape);
+//                    if (maps[j][i] == 'x' || maps[j][i] == '*') {
+//                        brick = new Brick(i, j, Sprite.brick.getFxImage());
+//                        EntityArr.bricks.add(brick);
+//                    } else if (maps[j][i] == '1') {
+//                        balloom = new Balloom(i, j, Sprite.balloom_left1.getFxImage());
+//                        EntityArr.enemies.add(balloom);
+//                    } else if (maps[j][i] == '2') {
+//                        oneal = new Oneal(i, j, Sprite.oneal_right1.getFxImage());
+//                        EntityArr.enemies.add(oneal);
+//                    } else if (maps[j][i] == '3') {
+//                        doll = new Doll(i, j, Sprite.doll_left2.getFxImage());
+//                        EntityArr.enemies.add(doll);
+//                    } else if (maps[j][i] == '6') {
+//                        ovape = new Ovape(i, j, Sprite.ovape_right1.getFxImage());
+//                        EntityArr.enemies.add(ovape);
+//                    }
+
+                    switch (maps[j][i]) {
+                        case 'x':
+                            EntityArr.bricks.add(new Brick(i, j, Sprite.brick.getFxImage()));
+                            break;
+                        case '*':
+                            EntityArr.bricks.add(new Brick(i, j, Sprite.brick.getFxImage()));
+                            break;
+                        case '1':
+                            EntityArr.enemies.add(new Balloom(i, j, Sprite.balloom_left1.getFxImage()));
+                            break;
+                        case '2':
+                            EntityArr.enemies.add(new Oneal(i, j, Sprite.oneal_right1.getFxImage()));
+                            break;
+                        case '3':
+                            EntityArr.enemies.add(new Doll(i, j, Sprite.doll_left2.getFxImage()));
+                            break;
+                        case '4':
+                            EntityArr.enemies.add(new Ovape(i, j, Sprite.ovape_right1.getFxImage()));
+                            break;
                     }
                 }
             }

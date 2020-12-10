@@ -4,6 +4,7 @@ import bomberman.entities.Entity;
 import bomberman.entities.EntityArr;
 import bomberman.entities.blocks.Brick;
 import bomberman.entities.enemy.Enemy;
+import bomberman.sound.Sound;
 import javafx.scene.image.Image;
 
 public abstract class Flame extends Entity {

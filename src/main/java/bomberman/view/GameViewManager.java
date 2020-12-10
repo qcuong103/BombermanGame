@@ -34,7 +34,7 @@ public class GameViewManager {
     public static int TIME = -1;
     public static int POINTS = 0;
     public static int numOfScreen = -1;
-    public boolean isGameOver = false;
+    public boolean isGameOver;
 //    public boolean isGameOver2 = false;
     public int abc = 0;
 
@@ -52,6 +52,7 @@ public class GameViewManager {
     public GameViewManager() {
         // Tao Canvas
         CreateMap.createMapByLevel(1);
+        isGameOver = false;
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
 
@@ -138,30 +139,30 @@ public class GameViewManager {
         timer1.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (TIME == 0) timer1.cancel();
+                if ((TIME == 0) || isGameOver) timer1.cancel();
 //                if (scene.)
 //                timeLabel.setText("Time: " + TIME);
                 --TIME;
-
-                if (isGameOver) {
-//                    drawScreen(gc);
-//                    timer.stop();
-//                    drawEndGame(canvas.getGraphicsContext2D(), POINTS);
-                    timer1.cancel();
-                }
+//                if (isGameOver) {
+////                    drawScreen(gc);
+////                    timer.stop();
+////                    drawEndGame(canvas.getGraphicsContext2D(), POINTS);
+//                    timer1.cancel();
+//                }
             }
 
 //        if (!EntityArr.bomberman.isAlive()) {
 ////            drawScreen(gc);
 //                endGame();
 //            }
-        }, 1000, 1000);
-        timer1.purge();
+        }, 1000L, 1000);
+
 
         stage.setOnCloseRequest(event -> {
             timer1.cancel();
 //                stage.close();
         });
+        timer1.purge();
 
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
@@ -275,10 +276,12 @@ public class GameViewManager {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
+
         abc++;
         if (abc > 210) {
 //            abc = 0;
             Sound.stopsound = true;
+            Sound.isStopsound = true;
             gc.setFill(Color.BLACK);
 
             gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -304,23 +307,26 @@ public class GameViewManager {
 //            button.setLayoutX(canvas.getWidth() / 2);
 //            button.setLayoutY(canvas.getHeight() + 50);
 //            root.getChildren().add(button);
+
         }
 
-        if (abc > 500) {
-//            isGameOver2 = true;
-            stage.hide();
-            ViewManager.mainStage.show();
-            abc = 0;
-        }
+//        if (abc > 500) {
+////            isGameOver2 = true;
+////            stage.hide();
+////            ViewManager.mainStage.show();
+////            abc = 0;
+//
+//        }
+//       Sound.stop("soundtrack");
     }
 
 
     public void endGame() {
-        numOfScreen = 1;
         isGameOver = true;
 //        isGameOver2 = true;
 //        drawScreen(gc);
         drawEndGame(gc, POINTS);
+
     }
 
     public static GameViewManager getInstance() {
