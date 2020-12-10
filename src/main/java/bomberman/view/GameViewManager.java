@@ -36,7 +36,7 @@ public class GameViewManager {
     public static int numOfScreen = -1;
     public boolean isGameOver;
 //    public boolean isGameOver2 = false;
-    public int abc = 0;
+    public int abc;
 
     private final Stage stage = new Stage();
     private final GraphicsContext gc;
@@ -95,14 +95,16 @@ public class GameViewManager {
 
             @Override
             public void handle(long l) {
-                if (up) {
-                    EntityArr.bomberman.goUp();
-                } else if (down) {
-                    EntityArr.bomberman.goDown();
-                } else if (left) {
-                    EntityArr.bomberman.goLeft();
-                } else if (right) {
-                    EntityArr.bomberman.goRight();
+                if(!isGameOver) {
+                    if (up) {
+                        EntityArr.bomberman.goUp();
+                    } else if (down) {
+                        EntityArr.bomberman.goDown();
+                    } else if (left) {
+                        EntityArr.bomberman.goLeft();
+                    } else if (right) {
+                        EntityArr.bomberman.goRight();
+                    }
                 }
                 render();
                 update();
@@ -125,10 +127,12 @@ public class GameViewManager {
 //                System.out.println(l%100000000);
                 timeLabel.setText("Time: " + TIME);
                 pointLabel.setText("Point: " + POINTS);
+
 //                drawScreen(gc);
 
             }
         };
+
         timer.start();
 //        if (isGameOver2) {
 //            timer.stop();
@@ -143,6 +147,9 @@ public class GameViewManager {
 //                if (scene.)
 //                timeLabel.setText("Time: " + TIME);
                 --TIME;
+                if (abc>211) {
+                    timer.stop();
+                }
 //                if (isGameOver) {
 ////                    drawScreen(gc);
 ////                    timer.stop();
@@ -163,7 +170,6 @@ public class GameViewManager {
 //                stage.close();
         });
         timer1.purge();
-
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case UP:
@@ -251,6 +257,8 @@ public class GameViewManager {
     }
 
     public void showGame() {
+        abc=0;
+        isGameOver = false;
         stage.show();
     }
 
@@ -278,7 +286,7 @@ public class GameViewManager {
 //        }
 
         abc++;
-        if (abc > 210) {
+        if (abc > 70) {
 //            abc = 0;
             Sound.stopsound = true;
             Sound.isStopsound = true;
