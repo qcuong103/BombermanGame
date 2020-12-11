@@ -67,7 +67,7 @@ public class Bomber extends Entity {
             }
         }
         setImage(Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1,
-                Sprite.player_right_2, this.animate, 30).getFxImage());
+                Sprite.player_right_2, this.animate, 60).getFxImage());
     }
 
     public void goLeft() {
@@ -84,7 +84,7 @@ public class Bomber extends Entity {
             }
         }
         setImage(Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1,
-                Sprite.player_left_2, this.animate, 30).getFxImage());
+                Sprite.player_left_2, this.animate, 60).getFxImage());
     }
 
     public void goUp() {
@@ -101,7 +101,7 @@ public class Bomber extends Entity {
             }
         }
         setImage(Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1,
-                Sprite.player_up_2, this.animate, 30).getFxImage());
+                Sprite.player_up_2, this.animate, 60).getFxImage());
     }
 
     public void goDown() {
@@ -118,7 +118,7 @@ public class Bomber extends Entity {
             }
         }
         setImage(Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1,
-                Sprite.player_down_2, this.animate, 30).getFxImage());
+                Sprite.player_down_2, this.animate, 60).getFxImage());
     }
 
     public int getSpeed() {
