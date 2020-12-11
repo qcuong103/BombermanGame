@@ -30,6 +30,7 @@ public abstract class Entity {
     public void render(GraphicsContext gc) {
         gc.drawImage(image, x, y);
     }
+
     public abstract void update();
 
     public Image getImage() {

@@ -15,6 +15,7 @@ import java.util.List;
  * Bomber có thể di chuyển theo 4 hướng trái/phải/lên/xuống theo sự điều khiển của người chơi.
  */
 public class Bomber extends bomberman.entities.Entity {
+
     private int numBombs = 1;
 
     private int flameLength = 1;
@@ -23,7 +24,7 @@ public class Bomber extends bomberman.entities.Entity {
 
     private boolean isAlive = true;
 
-    private boolean wallPass = false;
+    private boolean brickPass = false;
 
     private boolean flamePass = false;
 
@@ -48,8 +49,6 @@ public class Bomber extends bomberman.entities.Entity {
                 this.time++;
                 GameViewManager.level++;
                 CreateMap.createMapByLevel(GameViewManager.level);
-//                GameViewManager.numOfScreen = 2;
-//                GameViewManager.TIME = 200;
             }
         }
     }
@@ -160,16 +159,12 @@ public class Bomber extends bomberman.entities.Entity {
 
 
 
-    public void setWallPass(boolean wallPass) {
-        this.wallPass = wallPass;
+    public void setBrickPass(boolean brickPass) {
+        this.brickPass = brickPass;
     }
 
     public boolean isFlamePass() {
         return flamePass;
-    }
-
-    public void setFlamePass(boolean flamePass) {
-        this.flamePass = flamePass;
     }
 
     private boolean duplicateBomb(Bomb bomb) {
@@ -225,7 +220,6 @@ public class Bomber extends bomberman.entities.Entity {
 
 
     private void bomberDead() {
-//        Sound.play("endgame3");
         timeDead = 1;
         if (timeDead == 1) {
             timeDead++;
@@ -237,7 +231,7 @@ public class Bomber extends bomberman.entities.Entity {
 
     @Override
     public boolean checkBrick() {
-        if (this.wallPass) return false;
+        if (this.brickPass) return false;
         return super.checkBrick();
     }
 

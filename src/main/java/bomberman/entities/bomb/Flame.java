@@ -32,7 +32,6 @@ public abstract class Flame extends Entity {
     public boolean checkBrick() {
         for (Brick b : EntityArr.bricks) {
             if (this.getX() == b.getX() && this.getY() == b.getY()) {
-//                this.setVisible(false);
                 b.setBroken(true);
                 return true;
             }

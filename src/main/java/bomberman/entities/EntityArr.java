@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class EntityArr {
+
     public static List<Bomber> bombers = new ArrayList<>();
 
     public static List<bomberman.entities.Entity> grasses = new ArrayList<>();

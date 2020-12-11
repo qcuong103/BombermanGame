@@ -1,28 +1,20 @@
 package bomberman.view;
 
-import bomberman.entities.CreateMap;
-import bomberman.entities.Entity;
-import bomberman.entities.EntityArr;
+import bomberman.entities.*;
 import bomberman.entities.blocks.Brick;
-import bomberman.entities.bomb.Bomb;
-import bomberman.entities.bomb.Flame;
+import bomberman.entities.bomb.*;
 import bomberman.entities.enemy.Enemy;
 import bomberman.sound.Sound;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.canvas.*;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
 
 import java.util.Timer;
@@ -33,7 +25,6 @@ public class GameViewManager {
     public static int HEIGHT = 15;
     public static int TIME = -1;
     public static int POINTS = 0;
-    public static int numOfScreen = -1;
     public boolean isGameOver;
 //    public boolean isGameOver2 = false;
     public int abc;
@@ -46,7 +37,7 @@ public class GameViewManager {
 
     boolean up, down, left, right;
 
-    private static GameViewManager gameViewManager = new GameViewManager();
+    private static final GameViewManager gameViewManager = new GameViewManager();
 
     public static int level = 1;
 
@@ -58,8 +49,6 @@ public class GameViewManager {
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
 
-        // Tao root container
-//        Group root = new Group();
         root = new BorderPane();
 
         GridPane gridPane = new GridPane();
@@ -83,16 +72,13 @@ public class GameViewManager {
 
         root.setTop(gridPane);
         root.setBottom(canvas);
-//        root.getChildren().add(canvas);
 
         // Tao scene
         Scene scene = new Scene(root);
 
         // Them scene vao stage
         stage.setScene(scene);
-//        stage.show();
 
-//        Sound.play("soundtrack");
         AnimationTimer timer = new AnimationTimer() {
 
             @Override
@@ -110,67 +96,30 @@ public class GameViewManager {
                 }
                 render();
                 update();
-//                if (l%1000000000 == 0) {
-//                    TIME--;
-//                    timeLabel.setText("Time: " + TIME);
-//                }
-//                TIME -= l%1000000000;
-
-//                if (lOLD != l) {
-//                    lOLD = l;
-//                    numChange++;
-//                    System.out.println(numChange);
-//                }
-//                if (numChange == 119) {
-//                    TIME--;
-//                    timeLabel.setText("Time: " + TIME);
-//                    numChange = 0;
-//                }
-//                System.out.println(l%100000000);
                 timeLabel.setText("Time: " + TIME);
                 pointLabel.setText("Point: " + POINTS);
-
-//                drawScreen(gc);
-
             }
         };
 
         timer.start();
-//        if (isGameOver2) {
-//            timer.stop();
-//        }
-
 
         Timer timer1 = new Timer();
         timer1.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if ((TIME == 0) || isGameOver) timer1.cancel();
-//                if (scene.)
-//                timeLabel.setText("Time: " + TIME);
                 --TIME;
                 if (abc>211) {
                     timer.stop();
                 }
-//                if (isGameOver) {
-////                    drawScreen(gc);
-////                    timer.stop();
-////                    drawEndGame(canvas.getGraphicsContext2D(), POINTS);
-//                    timer1.cancel();
-//                }
             }
-
-//        if (!EntityArr.bomberman.isAlive()) {
-////            drawScreen(gc);
-//                endGame();
-//            }
         }, 1000L, 1000);
 
 
         stage.setOnCloseRequest(event -> {
             timer1.cancel();
-//                stage.close();
         });
+
         timer1.purge();
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
@@ -191,6 +140,7 @@ public class GameViewManager {
                 EntityArr.bomberman.putBomb();
             }
 
+            //FOR admin :)
             if (e.getCode() == KeyCode.A) {
                 EntityArr.enemies.clear();
             }
@@ -250,12 +200,8 @@ public class GameViewManager {
         EntityArr.bombers.forEach(g -> g.render(gc));
 
         if (!EntityArr.bomberman.isAlive() || (TIME == 0)) {
-//            drawScreen(gc);
             endGame();
-//            gameOver = true;
         }
-//        drawScreen(gc);
-
     }
 
     public void showGame() {
@@ -268,30 +214,12 @@ public class GameViewManager {
         POINTS += points;
     }
 
-//    public void drawScreen(GraphicsContext gc) {
-//        switch (numOfScreen) {
-//            case 1:
-//                drawEndGame(gc, POINTS);
-//                break;
-//            case 2:
-////                drawEndGame(gc, level);
-//                drawNextLevel(gc, level);
-//                break;
-//        }
-////        drawEndGame(gc, POINTS);
-//    }
     public void drawEndGame(GraphicsContext gc, int points) {
-//        try {
-//            TimeUnit.SECONDS.sleep(2);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
 
         abc++;
         if (abc > 70) {
-//            abc = 0;
-            Sound.stopsound = true;
-            Sound.isStopsound = true;
+            Sound.stopSound = true;
+            Sound.isStopSound = true;
 
             timeGameOver = 1;
             if (timeGameOver == 1) {
@@ -309,7 +237,6 @@ public class GameViewManager {
             gc.setTextAlign(TextAlignment.CENTER);
             gc.setTextBaseline(VPos.CENTER);
             gc.setFill(Color.WHITE);
-//        drawCenteredString("GAME OVER", canvas.getWidth(), canvas.getHeight(), gc);
             gc.fillText("GAME OVER", canvas.getWidth() / 2, canvas.getHeight() / 2 - 25);
 
             font = new Font("Arial", 20);
@@ -317,32 +244,13 @@ public class GameViewManager {
             gc.setTextAlign(TextAlignment.CENTER);
             gc.setTextBaseline(VPos.CENTER);
             gc.setFill(Color.YELLOW);
-//        drawCenteredString("POINTS: " + points, canvas.getWidth(), canvas.getHeight() + 20, gc);
             gc.fillText("POINTS: " + points, canvas.getWidth() / 2, canvas.getHeight() / 2 + 25);
-
-//            BomberManButton button = new BomberManButton("MENU");
-//            button.setLayoutX(canvas.getWidth() / 2);
-//            button.setLayoutY(canvas.getHeight() + 50);
-//            root.getChildren().add(button);
-
         }
-
-//        if (abc > 500) {
-////            isGameOver2 = true;
-////            stage.hide();
-////            ViewManager.mainStage.show();
-////            abc = 0;
-//
-//        }
-//       Sound.stop("soundtrack");
     }
 
 
     public void endGame() {
         isGameOver = true;
-
-//        isGameOver2 = true;
-//        drawScreen(gc);
         drawEndGame(gc, POINTS);
 
     }

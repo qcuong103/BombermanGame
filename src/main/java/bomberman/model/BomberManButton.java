@@ -13,8 +13,10 @@ import java.io.FileNotFoundException;
 
 public class BomberManButton extends Button {
 
-    private static final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent;-fx-background-image: url('/model/yellow_button_pressed.png')";
-    private static final String BUTTON_FREE_STYLE = "-fx-background-color: transparent;-fx-background-image: url('/model/yellow_button.png');";
+    private static final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent;" +
+            "-fx-background-image: url('/model/yellow_button_pressed.png')";
+    private static final String BUTTON_FREE_STYLE = "-fx-background-color: transparent;" +
+            "-fx-background-image: url('/model/yellow_button.png');";
 
     public BomberManButton(String text) {
         setText(text);

@@ -4,6 +4,7 @@ import bomberman.view.Sprite;
 import javafx.scene.image.Image;
 
 public class Ovape extends Enemy {
+
     public Ovape(int xPoint, int yPoint, Image img) {
         super(xPoint, yPoint, img);
     }

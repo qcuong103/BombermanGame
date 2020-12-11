@@ -76,7 +76,7 @@ public class Brick extends Entity {
                         , Sprite.powerup_speed.getFxImage());
             case 4:
                 return new BrickPassItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
-                        , Sprite.powerup_wallpass.getFxImage());
+                        , Sprite.powerup_brickpass.getFxImage());
             default:
                 return null;
         }

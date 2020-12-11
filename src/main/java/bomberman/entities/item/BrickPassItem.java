@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
  * Item này giúp người chơi đi xuyên Brick.
  */
 public class BrickPassItem extends Item {
+
     public BrickPassItem(int xPoint, int yPoint, Image img) {
         super(xPoint, yPoint, img);
     }
@@ -17,7 +18,7 @@ public class BrickPassItem extends Item {
     public void update() {
         super.update();
         if (this.used == 1) {
-            EntityArr.bomberman.setWallPass(true);
+            EntityArr.bomberman.setBrickPass(true);
             Sound.play("Item");
         }
     }

@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
  * Item này giúp tăng số lượng Bomb có thể đặt thêm một.
  */
 public class BombItem extends Item {
+
     public BombItem(int xPoint, int yPoint, Image image) {
         super(xPoint, yPoint, image);
     }

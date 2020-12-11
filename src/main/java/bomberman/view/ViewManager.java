@@ -85,14 +85,18 @@ public class ViewManager {
         helpLabel.setLayoutX(68.75);
         helpLabel.setLayoutY(15.675);
 
-        GridPane helpGrid = new GridPane();
-        helpGrid.setLayoutX(68.75);
-        helpGrid.setLayoutY(15.675);
-        helpGrid.setHgap(20);
-        helpGrid.setVgap(20);
+        VBox helpContainer = new VBox();
+        helpContainer.setLayoutX(68.75);
+        helpContainer.setLayoutY(80);
 
-
-        helpScene.getPane().getChildren().addAll(helpLabel, helpGrid);
+        Label label1 = new Label("Ấn UP,LEFT,DOWN,RIGHT để di chuyển");
+        Label label2 = new Label("Ấn SPACE để đặt Bomb");
+        label1.setFont(Font.font("Verdana",12.5));
+        label2.setFont(Font.font("Verdana",12.5));
+        helpContainer.setBackground(new Background(new BackgroundFill(Color.MEDIUMAQUAMARINE,
+                new CornerRadii(20), new Insets(-20,-20,-20,-20))));
+        helpContainer.getChildren().addAll(label1, label2);
+        helpScene.getPane().getChildren().addAll(helpLabel, helpContainer);
     }
 
     private void createScoreSubScene() {
@@ -145,18 +149,8 @@ public class ViewManager {
         BomberManButton startButton = new BomberManButton("PLAY");
         addMenuButtons(startButton);
         startButton.setOnAction(event -> {
-//                try {
-//                    SoundEffects.playSound(new URI(BUTTON_SFX));
-//                } catch (URISyntaxException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//                showSubscene(shipChooserSubScene);
-//                shipChooserSubScene.moveSubScene();
             Sound.play("robotSFX");
             mainStage.hide();
-//            GameViewManager gameViewManager = new GameViewManager();
-//            gameViewManager.showGame();
 
             GameViewManager.getInstance().showGame();
             CreateMap.createMapByLevel(1);
@@ -168,13 +162,6 @@ public class ViewManager {
         BomberManButton scoresButton = new BomberManButton("SCORES");
         addMenuButtons(scoresButton);
         scoresButton.setOnAction(event -> {
-//                try {
-//                    SoundEffects.playSound(new URI(BUTTON_SFX));
-//                } catch (URISyntaxException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//                scoreSubScene.moveSubScene();
             Sound.play("robotSFX");
             showSubscene(scoreScene);
         });
@@ -184,15 +171,8 @@ public class ViewManager {
         BomberManButton helpButton = new BomberManButton("HELP");
         addMenuButtons(helpButton);
         helpButton.setOnAction(arg0 -> {
-//                try {
-//                    SoundEffects.playSound(new URI(BUTTON_SFX));
-//                } catch (URISyntaxException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
             Sound.play("robotSFX");
             showSubscene(helpScene);
-//                helpSubScene.moveSubScene();
         });
     }
 
@@ -201,15 +181,8 @@ public class ViewManager {
         addMenuButtons(creditsButton);
 
         creditsButton.setOnAction(arg0 -> {
-//                try {
-//                    SoundEffects.playSound(new URI(BUTTON_SFX));
-//                } catch (URISyntaxException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
             Sound.play("robotSFX");
             showSubscene(creditsScene);
-//                creditsSubScene.moveSubScene();
         });
     }
 
@@ -220,15 +193,6 @@ public class ViewManager {
         exitButton.setOnAction(event -> {
             Sound.play("robotSFX");
             mainStage.close();
-//                try {
-//                    SoundEffects.playSound(new URI(BUTTON_SFX));
-//                } catch (URISyntaxException e) {
-
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//                Platform.exit();
-//                // mainStage.close();
         });
     }
 
