@@ -31,7 +31,7 @@ public class GameViewManager {
     private int timeGameOver;
 
     private final Stage stage = new Stage();
-    private final GraphicsContext gc;
+    public final GraphicsContext gc;
     private final Canvas canvas;
     public BorderPane root;
 
@@ -252,7 +252,6 @@ public class GameViewManager {
     public void endGame() {
         isGameOver = true;
         drawEndGame(gc, POINTS);
-
     }
 
     public static GameViewManager getInstance() {

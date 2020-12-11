@@ -37,7 +37,6 @@ public abstract class Enemy extends Entity {
     public void update() {
         this.animate += Sprite.DEFAULT_SIZE / 10;
         checkBoundBomber();
-//        if ()
     }
 
     public int getSpeed() {

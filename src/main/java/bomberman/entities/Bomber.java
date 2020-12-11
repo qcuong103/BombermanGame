@@ -14,7 +14,7 @@ import java.util.List;
  * Bomber là nhân vật chính của trò chơi.
  * Bomber có thể di chuyển theo 4 hướng trái/phải/lên/xuống theo sự điều khiển của người chơi.
  */
-public class Bomber extends bomberman.entities.Entity {
+public class Bomber extends Entity {
 
     private int numBombs = 1;
 
