@@ -2,7 +2,6 @@ package bomberman.entities.enemy;
 
 import bomberman.entities.Entity;
 import bomberman.entities.EntityArr;
-import bomberman.sound.Sound;
 import bomberman.view.Sprite;
 import javafx.scene.image.Image;
 
@@ -58,7 +57,7 @@ public abstract class Enemy extends Entity {
     public void enemyDead() {
 //        GameViewManager.POINTS += 1;
         setImage(Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3
-                , this.animate, 20).getFxImage());
+                , this.animate, 120).getFxImage());
     }
 
     protected void randomVector() {

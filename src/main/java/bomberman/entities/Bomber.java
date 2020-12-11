@@ -20,7 +20,7 @@ public class Bomber extends Entity {
 
     private int flameLength = 1;
 
-    private int speed = Sprite.DEFAULT_SIZE / 8;
+    private int speed = Sprite.DEFAULT_SIZE / 16;
 
     private boolean isAlive = true;
 
@@ -67,7 +67,7 @@ public class Bomber extends Entity {
             }
         }
         setImage(Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1,
-                Sprite.player_right_2, this.animate, Sprite.DEFAULT_SIZE).getFxImage());
+                Sprite.player_right_2, this.animate, 60).getFxImage());
     }
 
     public void goLeft() {
@@ -84,7 +84,7 @@ public class Bomber extends Entity {
             }
         }
         setImage(Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1,
-                Sprite.player_left_2, this.animate, Sprite.DEFAULT_SIZE).getFxImage());
+                Sprite.player_left_2, this.animate, 60).getFxImage());
     }
 
     public void goUp() {
@@ -101,7 +101,7 @@ public class Bomber extends Entity {
             }
         }
         setImage(Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1,
-                Sprite.player_up_2, this.animate, Sprite.DEFAULT_SIZE).getFxImage());
+                Sprite.player_up_2, this.animate, 60).getFxImage());
     }
 
     public void goDown() {
@@ -118,7 +118,7 @@ public class Bomber extends Entity {
             }
         }
         setImage(Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1,
-                Sprite.player_down_2, this.animate, Sprite.DEFAULT_SIZE).getFxImage());
+                Sprite.player_down_2, this.animate, 60).getFxImage());
     }
 
     public int getSpeed() {
@@ -220,13 +220,13 @@ public class Bomber extends Entity {
 
 
     private void bomberDead() {
-        timeDead = 1;
-        if (timeDead == 1) {
-            timeDead++;
-            Sound.play("AA126_11");
-        }
+//        timeDead = 1;
+//        if (timeDead == 1) {
+//            timeDead++;
+//            Sound.play("AA126_11");
+//        }
         setImage(Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3
-                , this.animate, 120).getFxImage());
+                , this.animate, 60).getFxImage());
     }
 
     @Override
