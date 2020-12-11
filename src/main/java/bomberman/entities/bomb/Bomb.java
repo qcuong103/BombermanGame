@@ -62,7 +62,7 @@ public class Bomb extends Entity {
                 setTimeExploded();
             }
             this.setImage(Sprite.movingSprite(Sprite.bomb, Sprite.bomb_1
-                    , Sprite.bomb_2, animate, Sprite.DEFAULT_SIZE).getFxImage());
+                    , Sprite.bomb_2, animate, 60).getFxImage());
         }
     }
 

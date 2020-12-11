@@ -24,10 +24,10 @@ public class Doll extends Enemy {
         if (isAlive()) {
             if (this.getSpeedX() > 0) {
                 this.image = Sprite.movingSprite(Sprite.doll_right1, Sprite.doll_right2
-                        , Sprite.doll_right3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
+                        , Sprite.doll_right3, this.animate, 60).getFxImage();
             } else {
                 this.image = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2
-                        , Sprite.doll_left3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
+                        , Sprite.doll_left3, this.animate, 60).getFxImage();
             }
         } else {
             this.image = Sprite.doll_dead.getFxImage();

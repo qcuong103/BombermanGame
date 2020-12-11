@@ -27,10 +27,10 @@ public class Balloom extends Enemy {
         if (isAlive()) {
             if (this.getSpeedX() > 0) {
                 this.image = Sprite.movingSprite(Sprite.balloom_right1, Sprite.balloom_right2
-                        , Sprite.balloom_right3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
+                        , Sprite.balloom_right3, this.animate, 60).getFxImage();
             } else {
                 this.image = Sprite.movingSprite(Sprite.balloom_left1, Sprite.balloom_left2
-                        , Sprite.balloom_left3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
+                        , Sprite.balloom_left3, this.animate, 60).getFxImage();
             }
         } else {
             this.image = Sprite.balloom_dead.getFxImage();

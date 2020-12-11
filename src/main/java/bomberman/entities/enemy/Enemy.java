@@ -57,7 +57,7 @@ public abstract class Enemy extends Entity {
     public void enemyDead() {
 //        GameViewManager.POINTS += 1;
         setImage(Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3
-                , this.animate, 120).getFxImage());
+                , this.animate, 60).getFxImage());
     }
 
     protected void randomVector() {

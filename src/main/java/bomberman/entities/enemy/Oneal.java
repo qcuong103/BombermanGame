@@ -31,10 +31,10 @@ public class Oneal extends Enemy {
         if (isAlive()) {
             if (this.getSpeedX() > 0) {
                 this.image = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2
-                        , Sprite.oneal_right3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
+                        , Sprite.oneal_right3, this.animate, 60).getFxImage();
             } else {
                 this.image = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2
-                        , Sprite.oneal_left3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
+                        , Sprite.oneal_left3, this.animate, 60).getFxImage();
             }
         } else {
             this.image = Sprite.oneal_dead.getFxImage();
