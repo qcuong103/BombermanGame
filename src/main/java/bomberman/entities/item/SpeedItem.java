@@ -5,9 +5,13 @@ import bomberman.sound.Sound;
 import bomberman.view.Sprite;
 import javafx.scene.image.Image;
 
+/**
+ * SpeedItem
+ * Khi sử dụng Item này, Bomber sẽ được tăng vận tốc di chuyển thêm một giá trị thích hợp
+ */
 public class SpeedItem extends Item {
-    public SpeedItem(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+    public SpeedItem(int xPoint, int yPoint, Image image) {
+        super(xPoint, yPoint, image);
     }
 
     @Override

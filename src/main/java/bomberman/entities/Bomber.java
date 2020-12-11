@@ -10,6 +10,10 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Bomber là nhân vật chính của trò chơi.
+ * Bomber có thể di chuyển theo 4 hướng trái/phải/lên/xuống theo sự điều khiển của người chơi.
+ */
 public class Bomber extends bomberman.entities.Entity {
     private int numBombs = 1;
 
@@ -24,6 +28,8 @@ public class Bomber extends bomberman.entities.Entity {
     private boolean flamePass = false;
 
     private int time = 0;
+
+    private int timeDead = 0;
 
     public List<Bomb> bombs = new ArrayList<>();
 
@@ -61,7 +67,7 @@ public class Bomber extends bomberman.entities.Entity {
                 break;
             }
         }
-        setImg(Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1,
+        setImage(Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1,
                 Sprite.player_right_2, this.animate, Sprite.DEFAULT_SIZE).getFxImage());
     }
 
@@ -78,7 +84,7 @@ public class Bomber extends bomberman.entities.Entity {
                 break;
             }
         }
-        setImg(Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1,
+        setImage(Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1,
                 Sprite.player_left_2, this.animate, Sprite.DEFAULT_SIZE).getFxImage());
     }
 
@@ -95,7 +101,7 @@ public class Bomber extends bomberman.entities.Entity {
                 break;
             }
         }
-        setImg(Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1,
+        setImage(Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1,
                 Sprite.player_up_2, this.animate, Sprite.DEFAULT_SIZE).getFxImage());
     }
 
@@ -112,7 +118,7 @@ public class Bomber extends bomberman.entities.Entity {
                 break;
             }
         }
-        setImg(Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1,
+        setImage(Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1,
                 Sprite.player_down_2, this.animate, Sprite.DEFAULT_SIZE).getFxImage());
     }
 
@@ -220,7 +226,12 @@ public class Bomber extends bomberman.entities.Entity {
 
     private void bomberDead() {
 //        Sound.play("endgame3");
-        setImg(Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3
+        timeDead = 1;
+        if (timeDead == 1) {
+            timeDead++;
+            Sound.play("AA126_11");
+        }
+        setImage(Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3
                 , this.animate, 120).getFxImage());
     }
 

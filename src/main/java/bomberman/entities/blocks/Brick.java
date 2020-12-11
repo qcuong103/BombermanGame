@@ -1,7 +1,6 @@
 package bomberman.entities.blocks;
 
-import bomberman.entities.Entity;
-import bomberman.entities.EntityArr;
+import bomberman.entities.*;
 import bomberman.entities.item.*;
 import bomberman.view.Sprite;
 import javafx.scene.image.Image;
@@ -10,23 +9,34 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Brick là đối tượng được đặt lên các ô Grass, không cho phép đặt Bomb lên nhưng có thể bị phá hủy bởi Bomb
+ * được đặt gần đó. Bomber và Enemy thông thường không thể di chuyển vào vị trí Brick khi nó chưa bị phá hủy.
+ */
 public class Brick extends Entity {
-    private boolean isBroken = false;
-    private  int timeBroken = 0;
 
-    public Brick(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+    //isBroken check xem Brick đã bị phá hủy hay chưa.
+    private boolean isBroken = false;
+
+    //isBrokenDone để random Item 1 lần
+    private boolean isBrokenDone = false;
+
+    public Brick(int xPoint, int yPoint, Image image) {
+        super(xPoint, yPoint, image);
     }
 
     @Override
     public void update() {
+        //nếu Brick bị phá hủy, hiện animate của Brick
         if (isBroken) {
             this.animate += Sprite.DEFAULT_SIZE / 10;
-            this.setImg(Sprite.movingSprite(Sprite.brick_exploded, Sprite.brick_exploded1
+            this.setImage(Sprite.movingSprite(Sprite.brick_exploded, Sprite.brick_exploded1
                     , Sprite.brick_exploded2, animate, Sprite.DEFAULT_SIZE).getFxImage());
-            if (timeBroken == 0) {
-                this.timeBroken++;
-                TimerTask createItem = new TimerTask() {
+            //Random Item 1 lần
+            if (!isBrokenDone) {
+                this.isBrokenDone = true;
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
                         Item item = randomItem();
@@ -35,9 +45,7 @@ public class Brick extends Entity {
                             item.setVisible(true);
                         }
                     }
-                };
-                Timer timer = new Timer();
-                timer.schedule(createItem, 400L);
+                }, 400L);
             }
         }
     }
@@ -50,10 +58,13 @@ public class Brick extends Entity {
         return isBroken;
     }
 
+    /**
+     * Random Item theo xác suất 80% :)
+     * @return Item được chọn.
+     */
     private Item randomItem() {
         Random random = new Random();
-        int num = random.nextInt(5);
-        switch (num) {
+        switch (random.nextInt(5)) {
             case 1:
                 return new BombItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
                         , Sprite.powerup_bombs.getFxImage());
@@ -63,11 +74,9 @@ public class Brick extends Entity {
             case 3:
                 return new SpeedItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
                         , Sprite.powerup_speed.getFxImage());
-
             case 4:
-                return new WallPassItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
+                return new BrickPassItem(x / Sprite.SCALED_SIZE, y / Sprite.SCALED_SIZE
                         , Sprite.powerup_wallpass.getFxImage());
-
             default:
                 return null;
         }

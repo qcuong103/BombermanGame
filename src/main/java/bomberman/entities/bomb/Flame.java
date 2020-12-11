@@ -4,12 +4,12 @@ import bomberman.entities.Entity;
 import bomberman.entities.EntityArr;
 import bomberman.entities.blocks.Brick;
 import bomberman.entities.enemy.Enemy;
-import bomberman.sound.Sound;
 import javafx.scene.image.Image;
 
 public abstract class Flame extends Entity {
-    public Flame(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+
+    public Flame(int xPoint, int yPoint, Image image) {
+        super(xPoint, yPoint, image);
     }
 
     @Override
@@ -23,7 +23,6 @@ public abstract class Flame extends Entity {
     public boolean checkWall() {
         for (Entity w : EntityArr.walls) {
             if (this.getX() == w.getX() && this.getY() == w.getY()) {
-                this.setVisible(false);
                 return true;
             }
         }
@@ -33,7 +32,7 @@ public abstract class Flame extends Entity {
     public boolean checkBrick() {
         for (Brick b : EntityArr.bricks) {
             if (this.getX() == b.getX() && this.getY() == b.getY()) {
-                this.setVisible(false);
+//                this.setVisible(false);
                 b.setBroken(true);
                 return true;
             }

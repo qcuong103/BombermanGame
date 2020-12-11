@@ -5,8 +5,8 @@ import bomberman.view.Sprite;
 import javafx.scene.image.Image;
 
 public class Doll extends Enemy {
-    public Doll(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+    public Doll(int xPoint, int yPoint, Image image) {
+        super(xPoint, yPoint, image);
     }
 
     @Override
@@ -23,14 +23,14 @@ public class Doll extends Enemy {
     protected void choseSprite() {
         if (isAlive()) {
             if (this.getSpeedX() > 0) {
-                this.img = Sprite.movingSprite(Sprite.doll_right1, Sprite.doll_right2
+                this.image = Sprite.movingSprite(Sprite.doll_right1, Sprite.doll_right2
                         , Sprite.doll_right3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
             } else {
-                this.img = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2
+                this.image = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2
                         , Sprite.doll_left3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
             }
         } else {
-            this.img = Sprite.doll_dead.getFxImage();
+            this.image = Sprite.doll_dead.getFxImage();
         }
     }
 

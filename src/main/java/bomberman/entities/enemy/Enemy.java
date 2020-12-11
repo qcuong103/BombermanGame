@@ -8,6 +8,11 @@ import javafx.scene.image.Image;
 
 import java.util.Random;
 
+/**
+ * Enemy là các đối tượng mà Bomber phải tiêu diệt hết để có thể qua Level.
+ * Enemy có thể di chuyển ngẫu nhiên hoặc tự đuổi theo Bomber tùy theo loại Enemy.
+ * Các loại Enemy sẽ được mô tả cụ thể ở phần dưới.
+ */
 public abstract class Enemy extends Entity {
 
     public static final int RIGHT = 0;
@@ -24,8 +29,8 @@ public abstract class Enemy extends Entity {
 
     private boolean isAlive = true;
 
-    public Enemy(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+    public Enemy(int xPoint, int yPoint, Image image) {
+        super(xPoint, yPoint, image);
     }
 
     @Override
@@ -53,7 +58,7 @@ public abstract class Enemy extends Entity {
 
     public void enemyDead() {
 //        GameViewManager.POINTS += 1;
-        setImg(Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3
+        setImage(Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3
                 , this.animate, 20).getFxImage());
     }
 

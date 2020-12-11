@@ -3,10 +3,13 @@ package bomberman.entities.enemy;
 import bomberman.view.Sprite;
 import javafx.scene.image.Image;
 
+/**
+ * Balloom là Enemy đơn giản nhất, di chuyển ngẫu nhiên với vận tốc cố định.
+ */
 public class Balloom extends Enemy {
 
-    public Balloom(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+    public Balloom(int xPoint, int yPoint, Image image) {
+        super(xPoint, yPoint, image);
     }
 
     @Override
@@ -23,14 +26,14 @@ public class Balloom extends Enemy {
     protected void choseSprite() {
         if (isAlive()) {
             if (this.getSpeedX() > 0) {
-                this.img = Sprite.movingSprite(Sprite.balloom_right1, Sprite.balloom_right2
+                this.image = Sprite.movingSprite(Sprite.balloom_right1, Sprite.balloom_right2
                         , Sprite.balloom_right3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
             } else {
-                this.img = Sprite.movingSprite(Sprite.balloom_left1, Sprite.balloom_left2
+                this.image = Sprite.movingSprite(Sprite.balloom_left1, Sprite.balloom_left2
                         , Sprite.balloom_left3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
             }
         } else {
-            this.img = Sprite.balloom_dead.getFxImage();
+            this.image = Sprite.balloom_dead.getFxImage();
         }
     }
 

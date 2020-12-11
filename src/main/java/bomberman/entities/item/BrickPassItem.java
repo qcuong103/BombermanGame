@@ -4,9 +4,13 @@ import bomberman.entities.EntityArr;
 import bomberman.sound.Sound;
 import javafx.scene.image.Image;
 
-public class WallPassItem extends Item {
-    public WallPassItem(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+/**
+ * BrickPassItem
+ * Item này giúp người chơi đi xuyên Brick.
+ */
+public class BrickPassItem extends Item {
+    public BrickPassItem(int xPoint, int yPoint, Image img) {
+        super(xPoint, yPoint, img);
     }
 
     @Override

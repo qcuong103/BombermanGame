@@ -6,37 +6,38 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Entity {
+
     //Tọa độ X tính từ góc trái trên trong Canvas
     protected int x;
 
     //Tọa độ Y tính từ góc trái trên trong Canvas
     protected int y;
 
-    protected Image img;
+    protected Image image;
 
     protected int animate;
 
     protected boolean isVisible = true;
 
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
-    public Entity( int xUnit, int yUnit, Image img) {
-        this.x = xUnit * Sprite.SCALED_SIZE;
-        this.y = yUnit * Sprite.SCALED_SIZE;
-        this.img = img;
+    public Entity( int xPoint, int yPoint, Image image) {
+        this.x = xPoint * Sprite.SCALED_SIZE;
+        this.y = yPoint * Sprite.SCALED_SIZE;
+        this.image = image;
         this.animate = Sprite.DEFAULT_SIZE;
     }
 
     public void render(GraphicsContext gc) {
-        gc.drawImage(img, x, y);
+        gc.drawImage(image, x, y);
     }
     public abstract void update();
 
-    public Image getImg() {
-        return img;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImg(Image img) {
-        this.img = img;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public int getX() {

@@ -37,6 +37,7 @@ public class GameViewManager {
     public boolean isGameOver;
 //    public boolean isGameOver2 = false;
     public int abc;
+    private int timeGameOver;
 
     private final Stage stage = new Stage();
     private final GraphicsContext gc;
@@ -53,6 +54,7 @@ public class GameViewManager {
         // Tao Canvas
         CreateMap.createMapByLevel(1);
         isGameOver = false;
+        timeGameOver = 0;
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
 
@@ -290,6 +292,13 @@ public class GameViewManager {
 //            abc = 0;
             Sound.stopsound = true;
             Sound.isStopsound = true;
+
+            timeGameOver = 1;
+            if (timeGameOver == 1) {
+                timeGameOver++;
+                Sound.play("endgame3");
+            }
+
             gc.setFill(Color.BLACK);
 
             gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -331,6 +340,7 @@ public class GameViewManager {
 
     public void endGame() {
         isGameOver = true;
+
 //        isGameOver2 = true;
 //        drawScreen(gc);
         drawEndGame(gc, POINTS);

@@ -4,9 +4,13 @@ import bomberman.entities.EntityArr;
 import bomberman.sound.Sound;
 import javafx.scene.image.Image;
 
+/**
+ * FlameItem
+ * Item này giúp tăng phạm vi ảnh hưởng của Bomb khi nổ (độ dài các Flame lớn hơn)
+ */
 public class FlameItem extends Item {
-    public FlameItem(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+    public FlameItem(int xPoint, int yPoint, Image image) {
+        super(xPoint, yPoint, image);
     }
 
     @Override

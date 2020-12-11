@@ -6,10 +6,14 @@ import javafx.scene.image.Image;
 
 import java.util.Random;
 
+/**
+ * Oneal có tốc độ di chuyển thay đổi, lúc nhanh, lúc chậm
+ * và di chuyển "thông minh" hơn so với Balloom (biết đuổi theo Bomber)
+ */
 public class Oneal extends Enemy {
 
-    public Oneal(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+    public Oneal(int xPoint, int yPoint, Image img) {
+        super(xPoint, yPoint, img);
     }
 
     @Override
@@ -26,14 +30,14 @@ public class Oneal extends Enemy {
     protected void choseSprite() {
         if (isAlive()) {
             if (this.getSpeedX() > 0) {
-                this.img = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2
+                this.image = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2
                         , Sprite.oneal_right3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
             } else {
-                this.img = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2
+                this.image = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2
                         , Sprite.oneal_left3, this.animate, Sprite.DEFAULT_SIZE).getFxImage();
             }
         } else {
-            this.img = Sprite.oneal_dead.getFxImage();
+            this.image = Sprite.oneal_dead.getFxImage();
         }
     }
 
