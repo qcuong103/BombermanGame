@@ -27,7 +27,7 @@ public class Doll extends Enemy {
                         , Sprite.doll_right3, this.animate, 60).getFxImage();
             } else {
                 this.image = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2
-                        , Sprite.doll_left3, this.animate, 60).getFxImage();
+                        , Sprite.doll_left3, this.animate, 60 ).getFxImage();
             }
         } else {
             this.image = Sprite.doll_dead.getFxImage();

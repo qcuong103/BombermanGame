@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewManager {
+public class  ViewManager {
 
     private static final int HEIGHT = 480;
     private static final int WIDTH = 640;
