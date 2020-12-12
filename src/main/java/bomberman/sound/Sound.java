@@ -22,7 +22,6 @@ public class Sound {
                         Clip clip = AudioSystem.getClip();
                         clip.open(ais);
                         clip.start();
-                        if (isStopSound) clip.stop();
                     } catch (Exception e) {
                         System.out.println("sound fall");
                     }

@@ -28,7 +28,7 @@ public class GameViewManager {
     public boolean isGameOver;
 //    public boolean isGameOver2 = false;
     public int abc;
-    private int timeGameOver;
+    private int timeGameOver = 1;
 
     private final Stage stage = new Stage();
     public final GraphicsContext gc;
@@ -170,11 +170,13 @@ public class GameViewManager {
         EntityArr.enemies.forEach(Enemy::update);
         EntityArr.bomberman.bombs.forEach(Bomb::update);
         EntityArr.bricks.forEach(Brick::update);
+
         // update flame
         EntityArr.bomberman.bombs.forEach(g -> g.getfUp().forEach(Flame::update));
         EntityArr.bomberman.bombs.forEach(g -> g.getfDown().forEach(Flame::update));
         EntityArr.bomberman.bombs.forEach(g -> g.getfLeft().forEach(Flame::update));
         EntityArr.bomberman.bombs.forEach(g -> g.getfRight().forEach(Flame::update));
+
         // Update item
         EntityArr.items.forEach(g -> {
             if (g.isVisible()) g.update();
@@ -218,10 +220,9 @@ public class GameViewManager {
 
         abc++;
         if (abc > 70) {
-            Sound.stopSound = true;
-            Sound.isStopSound = true;
+//            Sound.stopSound = true;
+//            Sound.isStopSound = true;
 
-            timeGameOver = 1;
             if (timeGameOver == 1) {
                 timeGameOver++;
                 Sound.play("endgame3");

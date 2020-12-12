@@ -20,7 +20,7 @@ public class Bomber extends Entity {
 
     private int flameLength = 1;
 
-    private int speed = Sprite.DEFAULT_SIZE / 16;
+    private int speed = Sprite.DEFAULT_SIZE / 8;
 
     private boolean isAlive = true;
 
@@ -46,6 +46,7 @@ public class Bomber extends Entity {
         }
         if (checkPortal()) {
             if (this.time == 0) {
+                Sound.play("CRYST_UP");
                 this.time++;
                 GameViewManager.level++;
                 CreateMap.createMapByLevel(GameViewManager.level);
@@ -220,11 +221,10 @@ public class Bomber extends Entity {
 
 
     private void bomberDead() {
-//        timeDead = 1;
-//        if (timeDead == 1) {
-//            timeDead++;
-//            Sound.play("AA126_11");
-//        }
+        if (timeDead == 0) {
+            timeDead++;
+            Sound.play("AA126_11");
+        }
         setImage(Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3
                 , this.animate, 60).getFxImage());
     }

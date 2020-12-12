@@ -5,8 +5,6 @@ import bomberman.model.BomberManButton;
 import bomberman.model.BomberManSubScene;
 import bomberman.model.InfoLabel;
 import bomberman.sound.Sound;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -74,7 +72,19 @@ public class ViewManager {
         InfoLabel creditsLabel = new InfoLabel("   <<< CREDITS >>>");
         creditsLabel.setLayoutX(68.75);
         creditsLabel.setLayoutY(15.675);
-        creditsScene.getPane().getChildren().add(creditsLabel);
+
+        VBox creditsContainer = new VBox();
+        creditsContainer.setLayoutX(68.75);
+        creditsContainer.setLayoutY(80);
+
+        Label label1 = new Label("Dương Quốc Cường - MSSV: 18020254");
+        Label label2 = new Label("Nguyễn Hải Anh - MSSV: 18020125");
+        label1.setFont(Font.font("Verdana",12.5));
+        label2.setFont(Font.font("Verdana",12.5));
+        creditsContainer.setBackground(new Background(new BackgroundFill(Color.MEDIUMAQUAMARINE,
+                new CornerRadii(20), new Insets(-20,-20,-20,-20))));
+        creditsContainer.getChildren().addAll(label1, label2);
+        helpScene.getPane().getChildren().addAll(creditsLabel, creditsContainer);
     }
 
     private void createHelpSubScene() {
@@ -151,10 +161,8 @@ public class ViewManager {
         startButton.setOnAction(event -> {
             Sound.play("robotSFX");
             mainStage.hide();
-
             GameViewManager.getInstance().showGame();
             CreateMap.createMapByLevel(1);
-
         });
     }
 
